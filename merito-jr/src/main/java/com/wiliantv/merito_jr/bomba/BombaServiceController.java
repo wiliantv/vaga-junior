@@ -13,7 +13,7 @@ import java.util.Optional;
 public class BombaServiceController {
 
     private final BombaService service;
-    private final CombustivelService repository;
+    private final CombustivelService combustivelService;
 
 
     public Bomba create(BombaRequest request) {
@@ -31,8 +31,8 @@ public class BombaServiceController {
     }
 
 
-    public Bomba update(Long id, BombaRequest BombaRequest) {
-        return service.update(id, requestToModel(BombaRequest));
+    public Bomba update(Long id, BombaRequest request) {
+        return service.update(id, requestToModel(request));
     }
 
 
@@ -40,10 +40,10 @@ public class BombaServiceController {
         service.delete(id);
     }
 
-    public  Bomba requestToModel(BombaRequest BombaRequest) {
+    public  Bomba requestToModel(BombaRequest request) {
         Bomba bomba = new Bomba();
-        bomba.setNome(BombaRequest.getNome());
-        Optional.ofNullable(BombaRequest.getCombustivel_id()).ifPresent(id -> bomba.setCombustivel(repository.getById(id)));
+        bomba.setNome(request.getNome());
+        Optional.ofNullable(request.getCombustivelId()).ifPresent(id -> bomba.setCombustivel(combustivelService.getById(id)));
 
         return bomba;
     }

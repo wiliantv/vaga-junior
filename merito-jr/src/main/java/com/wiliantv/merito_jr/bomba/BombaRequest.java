@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BombaRequest {
     private String nome;
-    private Long combustivel_id;
+    private Long combustivelId;
 }
